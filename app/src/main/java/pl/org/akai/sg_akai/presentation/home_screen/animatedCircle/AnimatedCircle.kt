@@ -7,6 +7,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Canvas
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -25,8 +26,8 @@ private const val DividerLengthInDegrees = 1.8f
  */
 @Composable
 fun AnimatedCircle(
-    proportions: List<Float>,
-    colors: List<Color>,
+    proportions: List<Float> = listOf(0.1f, 0.2f, 0.5f),
+    colors: List<Color> = listOf(MaterialTheme.colors.primary, MaterialTheme.colors.primaryVariant, MaterialTheme.colors.secondary, MaterialTheme.colors.secondaryVariant),
     modifier: Modifier = Modifier
 ) {
     val currentState = remember {
@@ -57,7 +58,7 @@ fun AnimatedCircle(
                 durationMillis = 900,
                 easing = CubicBezierEasing(0f, 0.75f, 0.35f, 0.85f)
             )
-        }, label = "animation"
+        }, label = ""
     ) { progress ->
         if (progress == AnimatedCircleProgress.START) {
             0f
