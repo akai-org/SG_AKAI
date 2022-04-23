@@ -70,9 +70,7 @@ class MainActivity : AppCompatActivity() {
                             }
 
                             composable(Route.HOME) {
-//                                HomeScreen()
-                                PlantListScreen()
-
+                                HomeScreen(onClick = {navController.navigate(Route.PlantList)})
                             }
 
                             composable(Route.PlantList) {
