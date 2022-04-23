@@ -14,20 +14,28 @@ import com.poznan.put.michalxpz.core_ui.LocalSpacing
 import pl.org.akai.sg_akai.ui.theme.SmartGardenTypography
 
 private val LightColorPalette = lightColors(
-    primary = WhiteBackground1,
-    secondary = WhiteBackground2,
-    onPrimary = BlackText
+    primary = Green500,
+    primaryVariant = Green300,
+    secondary = PInk500,
+    secondaryVariant = PInk300,
+    onPrimary = BlackText,
+    onError = Red,
+    onSecondary = WhiteText
 )
 
 private val DarkColorPalette = darkColors(
-    primary = BlackBackground1,
-    onPrimary = WhiteText,
-    secondary = BlackBackground2,
+    primary = Green700,
+    primaryVariant = Green900,
+    secondary = PInk700,
+    secondaryVariant = PInk900,
+    onPrimary = BlackText,
+    onError = Red,
+    onSecondary = WhiteText
 )
 
 @Composable
 fun SmartGardenTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = DarkColorPalette
+    val colors = if (isSystemInDarkTheme()) DarkColorPalette else LightColorPalette
 
     CompositionLocalProvider(LocalSpacing provides Dimensions()) {
         MaterialTheme(

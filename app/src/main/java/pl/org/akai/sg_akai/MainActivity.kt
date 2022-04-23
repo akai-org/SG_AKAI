@@ -4,9 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
+import com.poznan.put.michalxpz.core_ui.LocalSpacing
 import pl.org.akai.sg_akai.ui.theme.SmartGardenTheme
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +30,36 @@ class MainActivity : AppCompatActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                   MyButton(
+                       "Hello",
+                       {}
+                   )
                 }
             }
         }
+    }
+}
+
+@Composable
+fun MyButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    isEnabled: Boolean = true,
+    textStyle: TextStyle = MaterialTheme.typography.button,
+) {
+
+    Button(
+        onClick = onClick,
+        modifier = modifier,
+        enabled = isEnabled,
+        shape = RoundedCornerShape(100.dp)
+    ) {
+        Text(
+            text = text,
+            style = textStyle,
+            color = MaterialTheme.colors.onPrimary,
+            modifier = Modifier.padding(LocalSpacing.current.small)
+        )
     }
 }
