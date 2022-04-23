@@ -45,8 +45,8 @@ fun PlantStatisticsScreen() {
                     contentDescription = "A plant",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .fillMaxWidth(.6f)
-                        .padding(start = 15.dp)
+                        .fillMaxWidth(.8f)
+                        .padding(start = 25.dp, top = 20.dp)
                 )
             }
             Box(
@@ -124,6 +124,25 @@ fun PlantStatisticsScreen() {
                         }
                     }
                 }
+            }
+        }
+        Box {
+            Canvas(modifier = Modifier.size(400.dp), onDraw = {
+                drawCircle(
+                    color = Green100,
+                    radius = 600f,
+                    center = Offset(size.width / 2, size.height * .8f)
+                )
+            })
+            val chartImage = painterResource(id = R.drawable.chart)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Image(painter = chartImage, contentDescription = "Chart")
             }
         }
     }
