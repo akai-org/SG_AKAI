@@ -12,8 +12,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -25,7 +28,6 @@ import pl.org.akai.sg_akai.R
 import pl.org.akai.sg_akai.components.NiceButton
 import pl.org.akai.sg_akai.ui.theme.*
 
-@Preview
 @Composable
 fun WelcomeScreen(
     onNextClick: () -> Unit
@@ -42,7 +44,20 @@ fun WelcomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceAround
         ) {
-            Text("Smart Garden", style = SmartGardenTypography.h4, textAlign = TextAlign.Center)
+            Text(
+                "Smart Garden",
+                style = SmartGardenTypography.h4,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .graphicsLayer(alpha = 0.99f)
+                    .drawWithCache {
+                        val brush = Brush.horizontalGradient(listOf(Blue300, Green300))
+                        onDrawWithContent {
+                            drawContent()
+                            drawRect(brush, blendMode = BlendMode.SrcAtop)
+                        }
+                    }
+            )
             Text(
                 modifier = Modifier.widthIn(max = 240.dp, min = 100.dp),
                 text = "Wszystko czego potrzebujesz, by budować armię do ratowania Ziemi jest w Twojej kieszeni",
