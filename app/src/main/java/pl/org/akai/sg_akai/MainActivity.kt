@@ -15,8 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.poznan.put.michalxpz.core_ui.LocalSpacing
+import dagger.hilt.android.AndroidEntryPoint
 import pl.org.akai.sg_akai.ui.theme.SmartGardenTheme
 
+@AndroidEntryPoint`
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
