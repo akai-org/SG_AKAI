@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pl.org.akai.sg_akai.R
+import pl.org.akai.sg_akai.components.GradientText
 import pl.org.akai.sg_akai.components.NiceButton
 import pl.org.akai.sg_akai.ui.theme.*
 
@@ -44,20 +45,7 @@ fun WelcomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceAround
         ) {
-            Text(
-                "Smart Garden",
-                style = SmartGardenTypography.h4,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .graphicsLayer(alpha = 0.99f)
-                    .drawWithCache {
-                        val brush = Brush.horizontalGradient(listOf(Blue300, Green300))
-                        onDrawWithContent {
-                            drawContent()
-                            drawRect(brush, blendMode = BlendMode.SrcAtop)
-                        }
-                    }
-            )
+            GradientText(text = "Smart Garden")
             Text(
                 modifier = Modifier.widthIn(max = 240.dp, min = 100.dp),
                 text = "Wszystko czego potrzebujesz, by budować armię do ratowania Ziemi jest w Twojej kieszeni",
