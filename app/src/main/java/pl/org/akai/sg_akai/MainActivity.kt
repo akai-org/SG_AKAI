@@ -65,7 +65,9 @@ class MainActivity : AppCompatActivity() {
                             }
 
                             composable(Route.HOME) {
-                                HomeScreen()
+//                                HomeScreen()
+                                PlantListScreen()
+
                             }
 
                             composable(Route.PlantList) {

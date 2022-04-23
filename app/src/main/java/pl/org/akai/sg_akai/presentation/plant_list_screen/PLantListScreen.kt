@@ -1,5 +1,6 @@
 package pl.org.akai.sg_akai.presentation.plant_list_screen
 
+import android.graphics.Color
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow.Companion.Clip
 import androidx.compose.ui.unit.dp
 import pl.org.akai.sg_akai.R
-import pl.org.akai.sg_akai.ui.theme.SmartGardenTypography
+import pl.org.akai.sg_akai.ui.theme.*
 
 val numbers: Array<Int> = Array(100) { it + 1 }
 
@@ -32,26 +33,36 @@ fun PlantListScreen() {
 
 @Composable
 fun PlantItem(number: Int) {
-    val shape = RoundedCornerShape(12.dp)
+
     Column(
         Modifier
             .padding(8.dp)
-            .height(175.dp)
-            .background(MaterialTheme.colors.primary,shape)
-            .clip(shape),
+            .height(250.dp)
+            .background(PInk100.copy(alpha= 0.3F),RoundedCornerShape(30.dp))
+            .clip(RoundedCornerShape(30.dp)),
         Arrangement.Center,
         Alignment.CenterHorizontally
 
 
     ){
-        Image(
-            painter = painterResource(R.drawable.ic_plant_svgrepo_com),
-            contentDescription = "Contact profile picture",
-            modifier = Modifier
-                .size(100.dp)
-        )
+        val shape = RoundedCornerShape(16.dp)
+        Box(
+            Modifier
+                .padding(10.dp)
+                .background(Green100,shape)
+                .clip(shape)
+                .padding(16.dp)
+        ){
+            Image(
+                painter = painterResource(R.drawable.ic_plant_leaf_svgrepo_com__1_),
+                contentDescription = "Contact profile picture",
+                modifier = Modifier
+                    .size(125.dp)
+            )
+        }
+
         Text("Nazwa Roślinki", style = SmartGardenTypography.body1)
-        Text( "19 December 2019", style = SmartGardenTypography.body1)
+        Text( "19 December 2019", style = SmartGardenTypography.body2)
     }
 }
 
