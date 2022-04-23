@@ -6,9 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,6 +25,7 @@ import pl.org.akai.sg_akai.presentation.plant_list_screen.PlantListScreen
 import pl.org.akai.sg_akai.presentation.plant_statistics_screen.PlantStatisticsScreen
 import pl.org.akai.sg_akai.presentation.welcome_screen.WelcomeScreen
 import pl.org.akai.sg_akai.ui.theme.SmartGardenTheme
+import pl.org.akai.sg_akai.presentation.menu.TopBar
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -27,47 +33,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //setcontent view for xml ui
 //        setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
         //set content for compose ui
         setContent {
             SmartGardenTheme() {
                 val navController = rememberNavController()
-                val scaffoldState = rememberScaffoldState()
-                val openDrawer = rememberDrawerState(DrawerValue.Closed)
                 val spacing = LocalSpacing.current
-
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    scaffoldState = scaffoldState
+                val coroutineScope = rememberCoroutineScope()
+                Scaffold (
+                    topBar = {
+                        TopBar(
+                            showTopBar = navController.currentDestination?.let { it.route in listOf(Route.HOME, Route.WELCOME) } ?: false,
+                            onBackArrowClicked = { navController.popBackStack() },
+                            onHomeIconClicked = { navController.navigate(Route.HOME) },
+                            onCalendarIconClicked = {}
+                        )
+                    }
                 ) {
                     Column(
                         modifier = Modifier.fillMaxSize()
                     ) {
-                        TopAppBar {
-                            Row(
-                                modifier = Modifier.align(Alignment.CenterVertically).fillMaxWidth()
-                            ) {
-                                Route.getList().forEachIndexed { index, route ->
-
-                                    Button(
-                                        modifier = Modifier
-                                            .align(Alignment.CenterVertically)
-                                            .weight(1f)
-                                            .fillMaxWidth(),
-                                        onClick = { navController.navigate(Route.PlantList) },
-                                        shape = RoundedCornerShape(100.dp)
-                                    ) {
-                                        Text(
-                                            text = route,
-                                        )
-                                    }
-                                    if (index != Route.getList().lastIndex) {
-                                        Spacer(modifier = Modifier.width(spacing.small))
-                                    }
-                                }
-                            }
-                        }
-
                         Spacer(modifier = Modifier.height(spacing.mediumLarge))
 
                         NavHost(
