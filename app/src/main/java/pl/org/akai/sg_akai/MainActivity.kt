@@ -3,15 +3,16 @@ package pl.org.akai.sg_akai
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.poznan.put.michalxpz.core_ui.LocalSpacing
 import dagger.hilt.android.AndroidEntryPoint
 import pl.org.akai.sg_akai.presentation.home_screen.HomeScreen
 import pl.org.akai.sg_akai.presentation.navigation.Route
@@ -32,72 +33,62 @@ class MainActivity : AppCompatActivity() {
             SmartGardenTheme() {
                 val navController = rememberNavController()
                 val scaffoldState = rememberScaffoldState()
+                val openDrawer = rememberDrawerState(DrawerValue.Closed)
+                val spacing = LocalSpacing.current
+
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     scaffoldState = scaffoldState
                 ) {
-                    TopAppBar{
-                        Row (modifier = Modifier.align(Alignment.CenterVertically).fillMaxWidth()) {
-                            Button(
-                                modifier = Modifier
-                                    .align(Alignment.CenterVertically)
-                                    .weight(1f)
-                                    .fillMaxWidth(),
-                                onClick = { navController.navigate(Route.HOME)}
-                            ) {
-                                Text("Home")
-                            }
-
-                            Button(
-                                modifier = Modifier
-                                    .align(Alignment.CenterVertically)
-                                    .weight(1f)
-                                    .fillMaxWidth(),
-                                onClick = { navController.navigate(Route.WELCOME)}
-                            ) {
-                                Text("Welcome")
-                            }
-
-                            Button(
-                                modifier = Modifier
-                                    .align(Alignment.CenterVertically)
-                                    .weight(1f)
-                                    .fillMaxWidth(),
-                                onClick = { navController.navigate(Route.Statistics)}
-                            ) {
-                                Text("Stats")
-                            }
-
-                            Button(
-                                modifier = Modifier
-                                    .align(Alignment.CenterVertically)
-                                    .weight(1f)
-                                    .fillMaxWidth(),
-                                onClick = { navController.navigate(Route.PlantList)}
-                            ) {
-                                Text("List")
-                            }
-                        }
-                    }
-
-                    NavHost(
-                        navController = navController,
-                        startDestination = Route.WELCOME
+                    Column(
+                        modifier = Modifier.fillMaxSize()
                     ) {
-                        composable(Route.WELCOME) {
-                            WelcomeScreen()
+                        TopAppBar {
+                            Row(
+                                modifier = Modifier.align(Alignment.CenterVertically).fillMaxWidth()
+                            ) {
+                                Route.getList().forEachIndexed { index, route ->
+
+                                    Button(
+                                        modifier = Modifier
+                                            .align(Alignment.CenterVertically)
+                                            .weight(1f)
+                                            .fillMaxWidth(),
+                                        onClick = { navController.navigate(Route.PlantList) },
+                                        shape = RoundedCornerShape(100.dp)
+                                    ) {
+                                        Text(
+                                            text = route,
+                                        )
+                                    }
+                                    if (index != Route.getList().lastIndex) {
+                                        Spacer(modifier = Modifier.width(spacing.small))
+                                    }
+                                }
+                            }
                         }
 
-                        composable(Route.HOME) {
-                            HomeScreen()
-                        }
+                        Spacer(modifier = Modifier.height(spacing.mediumLarge))
 
-                        composable(Route.PlantList) {
-                            PlantListScreen()
-                        }
+                        NavHost(
+                            navController = navController,
+                            startDestination = Route.WELCOME
+                        ) {
+                            composable(Route.WELCOME) {
+                                WelcomeScreen()
+                            }
 
-                        composable(Route.Statistics) {
-                            PlantStatisticsScreen()
+                            composable(Route.HOME) {
+                                HomeScreen()
+                            }
+
+                            composable(Route.PlantList) {
+                                PlantListScreen()
+                            }
+
+                            composable(Route.Statistics) {
+                                PlantStatisticsScreen()
+                            }
                         }
                     }
                 }
