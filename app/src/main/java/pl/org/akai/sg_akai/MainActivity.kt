@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                             startDestination = Route.WELCOME
                         ) {
                             composable(Route.WELCOME) {
-                                WelcomeScreen()
+                                WelcomeScreen( onNextClick = { navController.navigate(Route.HOME) } )
                             }
 
                             composable(Route.HOME) {

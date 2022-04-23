@@ -27,7 +27,9 @@ import pl.org.akai.sg_akai.ui.theme.*
 
 @Preview
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(
+    onNextClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -56,7 +58,7 @@ fun WelcomeScreen() {
                 .fillMaxWidth()
                 .padding(end = 15.dp)
         ) {
-            NiceButton(text = "Przejdź Dalej")
+            NiceButton(text = "Przejdź Dalej", onClick = { onNextClick() })
         }
 
     }
