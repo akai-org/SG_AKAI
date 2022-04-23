@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
                         NavHost(
                             navController = navController,
-                            startDestination = Route.WELCOME
+                            startDestination = Route.Statistics
                         ) {
                             composable(
                                 Route.WELCOME,
