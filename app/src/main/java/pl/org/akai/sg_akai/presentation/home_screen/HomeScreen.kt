@@ -3,8 +3,6 @@ package pl.org.akai.sg_akai.presentation.home_screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,9 +11,11 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import com.poznan.put.michalxpz.core_ui.LocalSpacing
 import pl.org.akai.components.small_components.SmartGardenSurface
 import pl.org.akai.sg_akai.R
+import pl.org.akai.sg_akai.components.NiceButton
 import pl.org.akai.sg_akai.presentation.home_screen.animatedCircle.AnimatedCircle
 
 @Composable
@@ -25,11 +25,12 @@ fun HomeScreen(
     val spacing = LocalSpacing.current
 
     SmartGardenSurface(
-        modifier = Modifier.fillMaxSize().padding(spacing.mediumSmall)
+        modifier = Modifier.fillMaxSize().padding(spacing.large)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize()
         ) {
             val colorStart = MaterialTheme.colors.primary
             val colorEnd = MaterialTheme.colors.secondary
@@ -46,13 +47,23 @@ fun HomeScreen(
                         }
                     }
                     .align(Alignment.CenterHorizontally)
-                    .padding(top = spacing.mediumLarge)
+                    .padding(horizontal = spacing.mediumLarge)
+                    .fillMaxSize()
+                    .weight(1f)
+            )
+
+            AnimatedCircle(
+                modifier = Modifier
+//                            .align(Alignment.Center)
+                    .fillMaxSize()
+                    .weight(1f),
+                proportions = listOf(0.4f, 0.14f, 0.34f, 0.2f)
             )
 
             Spacer(modifier = Modifier.height(spacing.mediumSmall))
-
             Text(
                 text = "Produkcja tlenu i wilgotności roślin",
+                textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h5,
                 modifier = Modifier.graphicsLayer(alpha = 0.99f)
                     .drawWithCache {
@@ -62,27 +73,30 @@ fun HomeScreen(
                             drawRect(brush, blendMode = BlendMode.SrcAtop)
                         }
                     }
-                    .align(Alignment.CenterHorizontally)
+                    .fillMaxSize()
                     .padding(top = spacing.mediumLarge)
+                    .weight(1f)
             )
-
-            AnimatedCircle(
-                proportions = listOf(0.3f, 0.5f, 0.6f),
-                colors = listOf(MaterialTheme.colors.primary, MaterialTheme.colors.secondary, MaterialTheme.colors.primaryVariant),
-                modifier = Modifier
-            )
-
             Image(
                 painter = painterResource(R.drawable.ic_graph),
-                contentDescription = null
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize().weight(2f)
             )
-
-            Button(
-                onClick = { onClick() }
+            Spacer(modifier = Modifier.height(spacing.mediumSmall))
+            Box(
+                contentAlignment = Alignment.BottomEnd,
+                modifier = Modifier.fillMaxSize().weight(1f)
             ) {
-                Text(text = "Przejdź do ogrodu")
+                NiceButton(text = "Przejdź do ogrodu", onClick = { onClick() },)
             }
 
         }
     }
 }
+
+
+
+
+
+
+

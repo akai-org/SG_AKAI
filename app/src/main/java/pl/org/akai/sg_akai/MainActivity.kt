@@ -4,22 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import androidx.navigation.navArgument
 import com.poznan.put.michalxpz.core_ui.LocalSpacing
 import dagger.hilt.android.AndroidEntryPoint
 import pl.org.akai.sg_akai.presentation.home_screen.HomeScreen
@@ -44,12 +38,25 @@ class MainActivity : AppCompatActivity() {
                 val navController = rememberNavController()
                 val spacing = LocalSpacing.current
                 val coroutineScope = rememberCoroutineScope()
+                var currentScreen = remember{ mutableStateOf(Route.WELCOME) }
+                var previousScreen = remember{ mutableStateOf(Route.WELCOME) }
+
                 Scaffold (
                     topBar = {
                         TopBar(
-                            showTopBar = navController.currentDestination?.let { it.route in listOf(Route.HOME, Route.WELCOME) } ?: false,
-                            onBackArrowClicked = { navController.popBackStack() },
-                            onHomeIconClicked = { navController.navigate(Route.HOME) },
+                            showTopBar = !(currentScreen.value in listOf(Route.HOME, Route.WELCOME)),
+                            onBackArrowClicked = {
+                                navController.popBackStack()
+                                val state = currentScreen.value
+                                currentScreen.value = previousScreen.value
+                                previousScreen.value = currentScreen.value
+                            },
+                            onHomeIconClicked = {
+                                navController.navigate(Route.HOME)
+                                currentScreen.value = Route.HOME
+                                currentScreen.value = previousScreen.value
+                                previousScreen.value = currentScreen.value
+                                                },
                             onCalendarIconClicked = {}
                         )
                     }
@@ -66,17 +73,34 @@ class MainActivity : AppCompatActivity() {
                             composable(
                                 Route.WELCOME,
                             ) {
-                                WelcomeScreen( onNextClick = { navController.navigate(Route.HOME) } )
+                                WelcomeScreen( onNextClick = {
+                                    navController.navigate(Route.HOME)
+                                    previousScreen.value = currentScreen.value
+                                    currentScreen.value = Route.HOME
+
+                                } )
                             }
 
                             composable(Route.HOME) {
-//                                HomeScreen()
-                                PlantListScreen()
+                                HomeScreen(
+                                    onClick = {
+                                        navController.navigate(Route.PlantList)
+                                        previousScreen.value = currentScreen.value
+                                        currentScreen.value = Route.PlantList
+
+                                    }
+                                )
 
                             }
 
                             composable(Route.PlantList) {
-                                PlantListScreen()
+                                PlantListScreen(
+                                    onClick = {
+                                        navController.navigate(Route.Statistics)
+                                        previousScreen.value = currentScreen.value
+                                        currentScreen.value = Route.Statistics
+                                    }
+                                )
                             }
 
                             composable(Route.Statistics) {

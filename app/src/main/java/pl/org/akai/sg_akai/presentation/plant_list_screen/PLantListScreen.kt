@@ -27,7 +27,7 @@ val numbers: Array<Int> = Array(100) { it + 1 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PlantListScreen() {
+fun PlantListScreen(onClick: Any) {
     GridExample(numbers)
 }
 
@@ -38,7 +38,7 @@ fun PlantItem(number: Int) {
         Modifier
             .padding(8.dp)
             .height(250.dp)
-            .background(PInk100.copy(alpha= 0.3F),RoundedCornerShape(30.dp))
+            .background(LightGray.copy(alpha= 0.3F),RoundedCornerShape(30.dp))
             .clip(RoundedCornerShape(30.dp)),
         Arrangement.Center,
         Alignment.CenterHorizontally

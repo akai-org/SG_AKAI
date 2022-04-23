@@ -18,7 +18,7 @@ import pl.org.akai.sg_akai.ui.theme.Green300
 
 
 @Composable
-fun NiceButton(text: String, onClick: () -> Unit = {}){
+fun NiceButton(text: String, onClick: () -> Unit = {}, modifier: Modifier = Modifier){
     Button(
         onClick = onClick,
         shape = RoundedCornerShape(100),
