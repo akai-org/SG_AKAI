@@ -3,19 +3,21 @@ package pl.org.akai.sg_akai
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.dp
-import com.poznan.put.michalxpz.core_ui.LocalSpacing
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import pl.org.akai.sg_akai.presentation.home_screen.HomeScreen
+import pl.org.akai.sg_akai.presentation.navigation.Route
+import pl.org.akai.sg_akai.presentation.plant_list_screen.PlantListScreen
+import pl.org.akai.sg_akai.presentation.plant_statistics_screen.PlantStatisticsScreen
+import pl.org.akai.sg_akai.presentation.welcome_screen.WelcomeScreen
 import pl.org.akai.sg_akai.ui.theme.SmartGardenTheme
 
 @AndroidEntryPoint
@@ -28,11 +30,76 @@ class MainActivity : AppCompatActivity() {
         //set content for compose ui
         setContent {
             SmartGardenTheme() {
-                Surface(
+                val navController = rememberNavController()
+                val scaffoldState = rememberScaffoldState()
+                Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    scaffoldState = scaffoldState
                 ) {
+                    TopAppBar{
+                        Row (modifier = Modifier.align(Alignment.CenterVertically).fillMaxWidth()) {
+                            Button(
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .weight(1f)
+                                    .fillMaxWidth(),
+                                onClick = { navController.navigate(Route.HOME)}
+                            ) {
+                                Text("Home")
+                            }
 
+                            Button(
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .weight(1f)
+                                    .fillMaxWidth(),
+                                onClick = { navController.navigate(Route.WELCOME)}
+                            ) {
+                                Text("Welcome")
+                            }
+
+                            Button(
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .weight(1f)
+                                    .fillMaxWidth(),
+                                onClick = { navController.navigate(Route.Statistics)}
+                            ) {
+                                Text("Stats")
+                            }
+
+                            Button(
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .weight(1f)
+                                    .fillMaxWidth(),
+                                onClick = { navController.navigate(Route.PlantList)}
+                            ) {
+                                Text("List")
+                            }
+                        }
+                    }
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = Route.WELCOME
+                    ) {
+                        composable(Route.WELCOME) {
+                            WelcomeScreen()
+                        }
+
+                        composable(Route.HOME) {
+                            HomeScreen()
+                        }
+
+                        composable(Route.PlantList) {
+                            PlantListScreen()
+                        }
+
+                        composable(Route.Statistics) {
+                            PlantStatisticsScreen()
+                        }
+                    }
                 }
             }
         }
