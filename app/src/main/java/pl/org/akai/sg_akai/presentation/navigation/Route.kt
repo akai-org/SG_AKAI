@@ -5,4 +5,8 @@ object Route {
     const val HOME = "Home"
     const val Statistics = "Statistics"
     const val PlantList = "List"
+
+    fun getList(): List<String> {
+        return listOf(WELCOME, HOME, Statistics, PlantList)
+    }
 }
