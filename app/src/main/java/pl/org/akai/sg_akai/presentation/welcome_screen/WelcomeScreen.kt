@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import pl.org.akai.sg_akai.R
+import pl.org.akai.sg_akai.components.NiceButton
 import pl.org.akai.sg_akai.ui.theme.*
 
 @Preview
@@ -48,29 +49,7 @@ fun WelcomeScreen() {
                 .fillMaxWidth()
                 .padding(end = 15.dp)
         ) {
-            Button(
-                onClick = { /*TODO*/ },
-                shape = RoundedCornerShape(100),
-                contentPadding = PaddingValues(),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .background(
-                            brush = Brush.horizontalGradient(
-                                colors = listOf(
-                                    Blue300, Green300
-                                )
-                            )
-                        )
-                        .padding(horizontal = 25.dp, vertical = 16.dp),
-                ) {
-                    Text(
-                        "Przejdź dalej",
-                        color = Color.White
-                    )
-                }
-            }
+            NiceButton(text = "Przejdź Dalej")
         }
 
     }
