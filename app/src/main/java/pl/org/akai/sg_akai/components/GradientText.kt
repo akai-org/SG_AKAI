@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import pl.org.akai.sg_akai.ui.theme.Blue300
 import pl.org.akai.sg_akai.ui.theme.Green300
 import pl.org.akai.sg_akai.ui.theme.SmartGardenTypography
