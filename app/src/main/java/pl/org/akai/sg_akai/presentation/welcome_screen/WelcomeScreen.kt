@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -31,6 +32,9 @@ fun WelcomeScreen() {
             textAlign = TextAlign.Center,
         )
         Image(painter = image, contentDescription = "")
+        Button(onClick = { /*TODO*/ }) {
+            Text("Przejdź dalej")
+        }
 
     }
 }
