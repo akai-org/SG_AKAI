@@ -25,7 +25,6 @@ import pl.org.akai.sg_akai.R
 import pl.org.akai.sg_akai.components.NiceButton
 import pl.org.akai.sg_akai.ui.theme.*
 
-@Preview
 @Composable
 fun WelcomeScreen(
     onNextClick: () -> Unit
