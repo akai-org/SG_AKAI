@@ -35,7 +35,7 @@ private val DarkColorPalette = darkColors(
 
 @Composable
 fun SmartGardenTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (isSystemInDarkTheme()) DarkColorPalette else LightColorPalette
+    val colors = LightColorPalette
 
     CompositionLocalProvider(LocalSpacing provides Dimensions()) {
         MaterialTheme(
