@@ -51,7 +51,7 @@ fun WelcomeScreen(
                 text = "Wszystko czego potrzebujesz, by budować armię do ratowania Ziemi jest w Twojej kieszeni",
                 style = SmartGardenTypography.caption,
                 fontSize = 15.sp,
-                textAlign = TextAlign.Center,
+                textAlign = TextAlign.Center
             )
         }
         Image(painter = image, contentDescription = "", modifier = Modifier.padding(top = 10.dp))
