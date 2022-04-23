@@ -1,0 +1,25 @@
+Index: .idea/deploymentTargetDropDown.xml
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+deleted file mode 100644
+--- a/.idea/deploymentTargetDropDown.xml	(revision 8a4cec1e56f4b58a95011cee58dcad488507508e)
++++ /dev/null	(revision 8a4cec1e56f4b58a95011cee58dcad488507508e)
+@@ -1,17 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="deploymentTargetDropDown">
+-    <runningDeviceTargetSelectedWithDropDown>
+-      <Target>
+-        <type value="RUNNING_DEVICE_TARGET" />
+-        <deviceKey>
+-          <Key>
+-            <type value="SERIAL_NUMBER" />
+-            <value value="R5CT21T4K5W" />
+-          </Key>
+-        </deviceKey>
+-      </Target>
+-    </runningDeviceTargetSelectedWithDropDown>
+-    <timeTargetWasSelectedWithDropDown value="2022-04-23T14:27:37.142662600Z" />
+-  </component>
+-</project>
+\ No newline at end of file

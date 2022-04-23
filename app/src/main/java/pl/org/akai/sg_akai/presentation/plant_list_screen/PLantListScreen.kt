@@ -1,10 +1,7 @@
 package pl.org.akai.sg_akai.presentation.plant_list_screen
 
 import android.graphics.Color
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyColumn
@@ -34,7 +31,7 @@ val numbers: Array<Int> = Array(100) { it + 1 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PlantListScreen(
-
+    onClick: () -> Unit
 ) {
     LazyColumn(
         Modifier
@@ -45,7 +42,7 @@ fun PlantListScreen(
         item {
             Box(
                 Modifier
-                    .padding(top = 150.dp, bottom = 50.dp),
+                    .padding(top = 0.dp, bottom = 50.dp),
                 contentAlignment = Alignment.Center){
                 Text(text = "Pielęgnacja roślin",
                     style = SmartGardenTypography.h4, color = Blue500
@@ -61,8 +58,8 @@ fun PlantListScreen(
                     .fillMaxWidth()
                     .padding(LocalSpacing.current.small)
             ) {
-                PlantItem(number = 1, modifier = Modifier.weight(1f).fillMaxWidth())
-                PlantItem(number = 1, modifier = Modifier.weight(1f).fillMaxWidth())
+                PlantItem(number = 1, modifier = Modifier.weight(1f).fillMaxWidth(), onClick = onClick)
+                PlantItem(number = 1, modifier = Modifier.weight(1f).fillMaxWidth(), onClick = onClick)
             }
 //            GridExample(numbers)
         }
@@ -72,7 +69,7 @@ fun PlantListScreen(
 }
 
 @Composable
-fun PlantItem(number: Int, modifier: Modifier) {
+fun PlantItem(number: Int, onClick: () -> Unit, modifier: Modifier) {
     Column(
         modifier
             .padding(8.dp)
@@ -92,6 +89,7 @@ fun PlantItem(number: Int, modifier: Modifier) {
                 .background(GreenNew100, shape)
                 .clip(shape)
                 .padding(16.dp)
+                .clickable { onClick() }
         ){
             Image(
                 painter = painterResource(R.drawable.ic_plant_leaf_svgrepo_com__1_),
