@@ -17,6 +17,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.poznan.put.michalxpz.core_ui.LocalSpacing
 import dagger.hilt.android.AndroidEntryPoint
 import pl.org.akai.sg_akai.presentation.home_screen.HomeScreen
@@ -60,12 +63,16 @@ class MainActivity : AppCompatActivity() {
                             navController = navController,
                             startDestination = Route.Statistics
                         ) {
-                            composable(Route.WELCOME) {
+                            composable(
+                                Route.WELCOME,
+                            ) {
                                 WelcomeScreen( onNextClick = { navController.navigate(Route.HOME) } )
                             }
 
                             composable(Route.HOME) {
-                                HomeScreen()
+//                                HomeScreen()
+                                PlantListScreen()
+
                             }
 
                             composable(Route.PlantList) {

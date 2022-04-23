@@ -57,6 +57,7 @@ dependencies {
     implementation(Compose.navigation)
     implementation(Compose.viewModelCompose)
     implementation(Compose.activityCompose)
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.16.1")
 
     implementation(project(Modules.core))
     implementation(project(Modules.coreUI))
