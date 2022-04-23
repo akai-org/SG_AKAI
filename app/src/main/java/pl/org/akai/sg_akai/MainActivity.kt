@@ -18,7 +18,7 @@ import com.poznan.put.michalxpz.core_ui.LocalSpacing
 import dagger.hilt.android.AndroidEntryPoint
 import pl.org.akai.sg_akai.ui.theme.SmartGardenTheme
 
-@AndroidEntryPoint`
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,36 +32,9 @@ class MainActivity : AppCompatActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                   MyButton(
-                       "Hello",
-                       {}
-                   )
+
                 }
             }
         }
-    }
-}
-
-@Composable
-fun MyButton(
-    text: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    isEnabled: Boolean = true,
-    textStyle: TextStyle = MaterialTheme.typography.button,
-) {
-
-    Button(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = isEnabled,
-        shape = RoundedCornerShape(100.dp)
-    ) {
-        Text(
-            text = text,
-            style = textStyle,
-            color = MaterialTheme.colors.onPrimary,
-            modifier = Modifier.padding(LocalSpacing.current.small)
-        )
     }
 }

@@ -9,11 +9,7 @@ import androidx.compose.ui.unit.sp
 import pl.org.akai.sg_akai.R
 
 val poppins = FontFamily(
-    Font(R.font.poppinsblack),
-    Font(R.font.poppinsbold),
-    Font(R.font.poppinslight),
-    Font(R.font.poppinsextrabold),
-    Font(R.font.poppinsmedium),
+    Font(R.font.poppinsblack)
 )
 
 val SmartGardenTypography = Typography(
@@ -52,17 +48,5 @@ val SmartGardenTypography = Typography(
         fontFamily = poppins,
         fontWeight = FontWeight.Black,
         fontSize = 14.sp
-    ),
-    /* Other default text styles to override
-    button = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.W500,
-        fontSize = 14.sp
-    ),
-    caption = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
     )
-    */
 )
